@@ -25,7 +25,7 @@ class AuthService {
       }
       return null;
     } catch (e) {
-      throw Exception('Falied To Sign In:${e.toString()}');
+      throw Exception('Failed To Sign In:${e.toString()}');
     }
   }
 

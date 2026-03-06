@@ -11,5 +11,5 @@ class AppRoutes {
   static const String userList= "/user-list"; 
   static const String friends= "/friends"; 
   static const String friendRequests= "/friend-requests"; 
-  static const String notifications= "/notifications"; 
+  static const String notifications= "/notifications";  
 }

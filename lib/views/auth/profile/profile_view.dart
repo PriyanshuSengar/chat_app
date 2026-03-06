@@ -1,20 +1,27 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'package:chat_app/controller/profile_controller.dart';
 import 'package:chat_app/routes/app_routes.dart';
 import 'package:chat_app/theme/app_theme.dart';
+import 'package:chat_app/views/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProfileView extends GetView<ProfileController> {
   const ProfileView({super.key});
   @override
-  Widget build(BuildContext content) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppTheme.primaryColor.withOpacity(0.2),
         title: Text("Profile"),
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (BuildContext context) => MainView()),
+            );
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         actions: [
           Obx(
             () => TextButton(

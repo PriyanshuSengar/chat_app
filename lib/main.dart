@@ -1,3 +1,4 @@
+import 'package:chat_app/controller/main_controller.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:chat_app/routes/app_pages.dart';
 import 'package:chat_app/theme/app_theme.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() async {
+    Get.lazyPut(() => MainController());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());

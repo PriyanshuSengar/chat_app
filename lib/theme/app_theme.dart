@@ -22,7 +22,6 @@ class AppTheme {
       onSecondary: Colors.white,
       error: errorColor,
       onSurface: textPrimaryColor,
-      onBackground: textPrimaryColor,
     ),
     textTheme: GoogleFonts.poppinsTextTheme().copyWith(
       headlineLarge: GoogleFonts.poppins(

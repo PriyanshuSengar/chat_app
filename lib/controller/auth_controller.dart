@@ -63,8 +63,8 @@ class AuthController extends GetxController {
       );
       if (userModel != null) {
         _userModel.value = userModel;
-        Get.offAllNamed(AppRoutes.profile);
-        // because we don't have main screen now 
+        Get.offAllNamed(AppRoutes.main);
+        // because we don't have main screen now
       }
     } catch (e) {
       _error.value = e.toString();
