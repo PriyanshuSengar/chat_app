@@ -1,4 +1,5 @@
 import 'package:chat_app/controller/profile_controller.dart';
+import 'package:chat_app/controller/user_list_controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +7,7 @@ class MainController extends GetxController {
   final RxInt _currentIndex = 0.obs;
   final PageController pageController = PageController();
   int get currentIndex => _currentIndex.value;
+
   @override
   void onInit() {
     super.onInit();
@@ -13,7 +15,7 @@ class MainController extends GetxController {
     // Get.lazyPut(() => HomeController());
 
     // Get.lazyPut(() => FriendsController());
-    // Get.lazyPut(() => UsersListController());
+    Get.lazyPut(() => UserListController());
     Get.lazyPut(() => ProfileController());
    
   }
