@@ -1,9 +1,8 @@
 import 'package:chat_app/controller/user_list_controller.dart';
 import 'package:chat_app/theme/app_theme.dart';
+import 'package:chat_app/views/widgets/user_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/utils.dart';
 
 class FindPeopleView extends GetView<UserListController> {
   const FindPeopleView({super.key});
@@ -16,7 +15,31 @@ class FindPeopleView extends GetView<UserListController> {
         centerTitle: true,
         leading: SizedBox(),
       ),
-      body: Column(children: [_buildsearchBar()]),
+      body: Column(
+        children: [
+          _buildsearchBar(),
+          Expanded(
+            child: Obx(() {
+              if (controller.filteredUsers.isEmpty) {
+                return _buildEmptyState();
+              }
+              return ListView.separated(
+                padding: EdgeInsets.all(16),
+                separatorBuilder: (context, index) => SizedBox(height: 8),
+                itemCount: controller.filteredUsers.length,
+                itemBuilder: (context, index) {
+                  final user = controller.filteredUsers[index];
+                  return UserListItem(
+                    user: user,
+                    onTap: () => controller.handleRelationshipAction(user),
+                    controller: controller,
+                  );
+                },
+              );
+            }),
+          ),
+        ],
+      ),
     );
   }
 
@@ -83,7 +106,7 @@ class FindPeopleView extends GetView<UserListController> {
               child: Icon(
                 Icons.people_outlined,
                 size: 50,
-                color: AppTheme.primaryColor,
+                color: AppTheme.textPrimaryColor,
               ),
             ),
             SizedBox(height: 24),
@@ -95,6 +118,17 @@ class FindPeopleView extends GetView<UserListController> {
                 color: AppTheme.textPrimaryColor,
                 fontWeight: FontWeight.bold,
               ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              controller.searchQuery.isNotEmpty
+                  ? 'Try a different search term'
+                  : 'All user will show here',
+              style: Theme.of(Get.context!).textTheme.bodyMedium?.copyWith(
+                color: AppTheme.textPrimaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
           ],
         ),

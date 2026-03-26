@@ -1,7 +1,8 @@
 import 'package:chat_app/controller/main_controller.dart';
 import 'package:chat_app/theme/app_theme.dart';
-import 'package:chat_app/views/auth/profile/find_people_view.dart';
-import 'package:chat_app/views/auth/profile/profile_view.dart';
+import 'package:chat_app/views/find_people_view.dart';
+import 'package:chat_app/views/friends_view.dart';
+import 'package:chat_app/views/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +22,7 @@ class MainView extends GetView<MainController> {
           // FriendView(),
           // UserListView(),
           Container(),
-          Container(),
+          FriendsView(),
           FindPeopleView(),
           ProfileView(),
         ],

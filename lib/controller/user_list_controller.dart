@@ -45,8 +45,8 @@ class UserListController extends GetxController {
     _loadUsers();
     _loadRelationships();
     debounce(
-      _sentRequests,
-      (_) => _filteredUser(),
+      _searchQuery,
+      (_) => filterUser(),
       time: Duration(milliseconds: 300),
     );
   }
@@ -57,19 +57,19 @@ class UserListController extends GetxController {
       final currentuserId = _authController.user?.uid;
       final otherUsers =
           userList.where((user) => user.id != currentuserId).toList();
-      if (_searchQuery.isEmpty) {
+      if (_searchQuery.value.isEmpty) {
         _filteredUser.value = otherUsers;
       } else {
-        _filteredUser();
+        filterUser();
       }
     });
   }
 
   void _loadRelationships() async {
     final currentuserId = _authController.user?.uid;
-    if (currentuserId == null) {
+    if (currentuserId != null) {
       _sentRequests.bindStream(
-        _firestoreService.getSentFriendRequestsStream(currentuserId!),
+        _firestoreService.getSentFriendRequestsStream(currentuserId),
       );
       _receivedRequest.bindStream(
         _firestoreService.getFriendRequestsStream(currentuserId),
@@ -143,10 +143,12 @@ class UserListController extends GetxController {
 
   void updateSearchQuery(String query) {
     _searchQuery.value = query;
+    filterUser();
   }
 
   void clearSearch() {
     _searchQuery.value = "";
+    filterUser();
   }
 
   Future<void> sendFriendRequest(UserModel user) async {
@@ -301,7 +303,7 @@ class UserListController extends GetxController {
       case UserRelationShipStatus.friendRequestSend:
         return 'Request Sent';
       case UserRelationShipStatus.friendRequestReceived:
-        return 'Accept Request';
+        return 'Accept ';
       case UserRelationShipStatus.friends:
         return 'Message';
       case UserRelationShipStatus.blocked:
@@ -369,17 +371,18 @@ class UserListController extends GetxController {
       if (difference.inMinutes < 1) {
         return 'Just Now';
       } else if (difference.inHours < 1) {
-        return 'Lat Seen ${difference.inMinutes} m ago';
+        return 'Last Seen ${difference.inMinutes} m ago';
       } else if (difference.inDays < 1) {
-        return 'Lat Seen ${difference.inHours} h ago';
+        return 'Last Seen ${difference.inHours} h ago';
       } else if (difference.inDays < 7) {
-        return 'Lat Seen ${difference.inHours} d ago';
+        return 'Last Seen ${difference.inDays} d ago';
       } else {
         return 'Last seen ${user.lastSeen.day}/${user.lastSeen.month}/${user.lastSeen.year}';
       }
     }
   }
-  void _clearError(){
+
+  void _clearError() {
     _error.value = '';
   }
 }
