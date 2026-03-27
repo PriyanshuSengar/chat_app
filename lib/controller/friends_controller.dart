@@ -8,7 +8,7 @@ import 'package:chat_app/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
+
 
 class FriendsController extends GetxController {
   final FirestoreService _firestoreService = FirestoreService();
@@ -126,8 +126,8 @@ class FriendsController extends GetxController {
             ),
             TextButton(
               onPressed: () => Get.back(result: true),
-              child: Text('Remove'),
               style: TextButton.styleFrom(foregroundColor: Colors.redAccent),
+              child: Text('Remove'),
             ),
           ],
         ),

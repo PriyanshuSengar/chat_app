@@ -2,7 +2,6 @@ import 'package:chat_app/controller/friends_controller.dart';
 import 'package:chat_app/theme/app_theme.dart';
 import 'package:chat_app/views/widgets/friend_list_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class FriendsView extends GetView<FriendsController> {
@@ -69,6 +68,7 @@ class FriendsView extends GetView<FriendsController> {
               ),
             ),
           ),
+          SizedBox(height: 50),
           Expanded(
             child: RefreshIndicator(
               onRefresh: controller.refreshFriends,
@@ -88,11 +88,11 @@ class FriendsView extends GetView<FriendsController> {
                   itemBuilder: (context, index) {
                     final friend = controller.filteredFriends[index];
                     return FriendListItem(
-                      friend : friend,
-                      lastSeenText : controller.getLastSeenText(friend),
-                      onTap:()=>controller.startChat(friend),
-                      onRemove : ()=>controller.removeFriend(friend), 
-                      onBlock : ()=>controller.blockFriend(friend),
+                      friend: friend,
+                      lastSeenText: controller.getLastSeenText(friend),
+                      onTap: () => controller.startChat(friend),
+                      onRemove: () => controller.removeFriend(friend),
+                      onBlock: () => controller.blockFriend(friend),
                     );
                   },
                 );

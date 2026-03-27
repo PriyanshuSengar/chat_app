@@ -5,7 +5,6 @@ import 'package:chat_app/models/user_model.dart';
 import 'package:chat_app/routes/app_routes.dart';
 import 'package:chat_app/services/firestore_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:uuid/uuid.dart';
 
